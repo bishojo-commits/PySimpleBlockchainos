@@ -14,6 +14,11 @@ class BlockchainTest(unittest.TestCase):
 
         self.assertEqual(length, 1)
 
+    def test_genesis_block_created_with_transactions_empty(self):
+        genesis_block = self.blockchain.last_block
+
+        self.assertEqual(len(genesis_block['transactions']), 0)
+
     def test_can_create_new_block(self):
         block = self.blockchain.new_block(3, 100)
         created_block = self.blockchain.chain.pop(1)
@@ -43,7 +48,7 @@ class BlockchainTest(unittest.TestCase):
     def test_proof_of_work_returns_digit(self):
         proof = self.blockchain.proof_of_work(0)
 
-        self.assertEquals(69732, proof)
+        self.assertEqual(69732, proof)
 
     def test_valid_proof_varifies_correctly_to_false(self):
         is_valid = self.blockchain.valid_proof(5997989, 6868)

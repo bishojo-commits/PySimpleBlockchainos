@@ -14,6 +14,20 @@ class BlockchainApiTest(unittest.TestCase):
 
         self.blockchain = Blockchain()
 
+    def chain_endpoint_status_ok(self):
+        response_chain = requests.get(self.API_PATH_CHAIN)
+
+        self.assertEqual(response_chain.status_code, 1)
+
+    def chain_endpoint_returns_chain(self):
+        requests.get(self.API_PATH_MINE)
+        response_chain = requests.get(self.API_PATH_CHAIN)
+
+        response_chain_content = json.loads(response_chain.text)
+        chain_length = response_chain_content['length']
+
+        self.assertEqual(chain_length, 1)
+
     def test_mining_endpoint_status_ok(self):
         response = requests.get(self.API_PATH_MINE)
 
