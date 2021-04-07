@@ -48,7 +48,7 @@ class BlockchainApiTest(unittest.TestCase):
 
         self.assertEqual(response_content['index'], last_block['index'])
 
-    def test_mining_endpoint_creates_created_block_with_current_transaction(self):
+    def test_mining_endpoint_creates_block_with_current_transaction(self):
         request_body = {"sender": "Bob", "recipient": "Alice", "amount": "30"}
 
         requests.post(self.API_PATH_TX_NEW, "", request_body)
@@ -61,6 +61,3 @@ class BlockchainApiTest(unittest.TestCase):
 
         self.assertEqual(last_block['transactions'][0]['sender'], "Bob")
 
-
-if __name__ == '__main__':
-    unittest.main()
