@@ -39,3 +39,20 @@ class BlockchainTest(unittest.TestCase):
         transaction_created = self.blockchain.current_transactions.pop(0)
 
         self.assertEqual("Bob", transaction_created['sender'])
+
+    def test_proof_of_work_returns_digit(self):
+        proof = self.blockchain.proof_of_work(0)
+
+        self.assertEquals(69732, proof)
+
+    def test_valid_proof_varifies_correctly_to_false(self):
+        is_valid = self.blockchain.valid_proof(5997989, 6868)
+
+        self.assertFalse(is_valid)
+
+    def test_valid_proof_varifies_correctly_to_true(self):
+        proof = self.blockchain.proof_of_work(0)
+        is_valid = self.blockchain.valid_proof(0, proof)
+
+        self.assertTrue(is_valid)
+
