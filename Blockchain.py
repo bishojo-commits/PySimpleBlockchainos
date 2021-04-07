@@ -119,7 +119,7 @@ def mine():
     block = blockchain.new_block(proof, previous_hash)
 
     response = {
-        'message': "New Block Forged",
+        'message': "New block forged",
         'index': block['index'],
         'transactions': block['transactions'],
         'proof': block['proof'],
@@ -140,7 +140,7 @@ def new_transaction():
     # Create new Transaction
     index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
 
-    response = {'message': f'Transaction will be added to Block {index}'}
+    response = {f'message': 'Transaction will be added to Block {index}'}
     return jsonify(response), 201
 
 
@@ -148,6 +148,7 @@ def new_transaction():
 def full_chain():
     response = {
         'chain': blockchain.chain,
+        'last_block': blockchain.last_block,
         'length': len(blockchain.chain),
     }
     return jsonify(response), 200
